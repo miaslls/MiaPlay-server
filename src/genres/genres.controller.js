@@ -5,7 +5,7 @@ export const getAllGenres = async (req, res) => {
     const genres = await getAll();
 
     if (!genres) {
-      res.status(404).send({ message: 'not found' });
+      return res.status(404).send({ message: 'not found' });
     }
 
     res.send(genres);
@@ -33,7 +33,7 @@ export const findGenreById = async (req, res) => {
     const genre = await findById(idParam);
 
     if (!genre) {
-      res.status(404).send({ message: 'not found' });
+      return res.status(404).send({ message: 'not found' });
     }
 
     res.send(genre);
@@ -50,7 +50,7 @@ export const updateGenre = async (req, res) => {
     const genreById = await findById(idParam);
 
     if (!genreById) {
-      res.status(404).send({ message: 'not found' });
+      return res.status(404).send({ message: 'not found' });
     }
 
     const genre = await update(idParam, body);
@@ -68,7 +68,11 @@ export const deleteGenre = async (req, res) => {
     const genreById = await findById(idParam);
 
     if (!genreById) {
-      res.status(404).send({ message: 'not found' });
+      return res.status(404).send({ message: 'not found' });
+    }
+
+    if (genreById.games.length > 0) {
+      return res.status(405).send({ message: 'cannot delete' });
     }
 
     await remove(idParam);
