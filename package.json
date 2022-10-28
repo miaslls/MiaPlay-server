@@ -1,0 +1,31 @@
+{
+  "name": "blue_mod05_proj01_miaplay-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/index",
+    "start": "node src/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BLUEEdTech-miaslls/BLUE_MOD05_PROJ01_MiaPlay-API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BLUEEdTech-miaslls/BLUE_MOD05_PROJ01_MiaPlay-API/issues"
+  },
+  "homepage": "https://github.com/BLUEEdTech-miaslls/BLUE_MOD05_PROJ01_MiaPlay-API#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.7.0"
+  }
+}
