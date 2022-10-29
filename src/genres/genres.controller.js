@@ -8,7 +8,13 @@ export const getAllGenres = async (req, res) => {
       return res.status(404).send({ message: 'not found' });
     }
 
-    res.send(genres);
+    const genreNamesAndIds = [];
+
+    genres.forEach((genre) => {
+      genreNamesAndIds.push({ name: genre.name, _id: genre._id });
+    });
+
+    res.send({ simpleGenres: genreNamesAndIds, genres });
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
