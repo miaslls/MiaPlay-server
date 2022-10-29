@@ -1,1 +1,30 @@
-# BLUE_MOD05_PROJ01_MiaPlay-API
+# MiaPlay-API
+
+## 🔗 [miaplay-api-01.onrender.com](http://miaplay-api-01.onrender.com)
+
+---
+
+---
+
+## TODO:
+
+---
+
+- ### redo MODELS to: Game, Genre, GamesByGenre:
+
+```
+Game : {
+    ...
+    genres: Genre[]
+}
+
+Genre: {
+    _id:
+    name:
+}
+
+GamesByGenre: {
+    genre:
+    games: Game[]
+}
+```
