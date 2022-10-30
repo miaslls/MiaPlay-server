@@ -9,7 +9,11 @@ export const getByGenreId = (genreId) =>
     .populate('genre')
     .populate('games');
 
-export const updateByGenreId = (genreId) =>
-  GenreGameList.findOneAndUpdate({ genre: { _id: genreId } });
+export const updateByGenreId = (genreId, body) =>
+  GenreGameList.findOneAndUpdate({ genre: { _id: genreId } }, body)
+    .setOptions({ returnOriginal: false })
+    .populate('genre')
+    .populate('games');
 
-export const removeByGenreId = (genreId) => GenreGameList.remove({ genre: { _id: genreId } });
+export const removeByGenreId = (genreId) =>
+  GenreGameList.findOneAndRemove({ genre: { _id: genreId } });
