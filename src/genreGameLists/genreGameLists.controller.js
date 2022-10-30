@@ -6,14 +6,6 @@ import {
   removeByGenreId,
 } from './genreGameLists.service.js';
 
-/*
-try {
-
- } catch (err) {
-    res.status(500).send({ message: err.message });
- }
-*/ // 🐞
-
 export const getAllGenreGameLists = async (req, res) => {
   try {
     const genreGameLists = await getAll();
