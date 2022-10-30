@@ -1,4 +1,8 @@
 import { getAll, add, findById, update, remove } from './genres.service.js';
+import {
+  getByGenreId as getGenreGameList,
+  removeByGenreId as removeGenreGameList,
+} from '../genreGameLists/genreGameLists.service.js';
 
 export const getAllGenres = async (req, res) => {
   try {
@@ -8,13 +12,7 @@ export const getAllGenres = async (req, res) => {
       return res.status(404).send({ message: 'not found' });
     }
 
-    const genreNamesAndIds = [];
-
-    genres.forEach((genre) => {
-      genreNamesAndIds.push({ name: genre.name, _id: genre._id });
-    });
-
-    res.send({ simpleGenres: genreNamesAndIds, genres });
+    res.send(genres);
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
@@ -77,11 +75,14 @@ export const deleteGenre = async (req, res) => {
       return res.status(404).send({ message: 'not found' });
     }
 
-    if (genreById.games.length > 0) {
+    const genreGameList = getGenreGameList(idParam);
+
+    if (genreGameList) {
       return res.status(405).send({ message: 'cannot delete' });
     }
 
     await remove(idParam);
+    await removeGenreGameList(idParam);
 
     res.send({ message: 'deleted' });
   } catch (err) {

@@ -5,7 +5,7 @@ export const getAll = () => GenreGameList.find().populate('genre').populate('gam
 export const create = (body) => GenreGameList.create(body);
 
 export const getByGenreId = (genreId) =>
-  GenreGameList.find({ genre: { _id: genreId } })
+  GenreGameList.findOne({ genre: { _id: genreId } })
     .populate('genre')
     .populate('games');
 

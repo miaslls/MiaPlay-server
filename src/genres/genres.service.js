@@ -1,6 +1,6 @@
 import Genre from './Genre.js';
 
-export const getAll = () => Genre.find().populate('games');
+export const getAll = () => Genre.find();
 
 export const add = (body) => Genre.create(body);
 

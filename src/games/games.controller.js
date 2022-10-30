@@ -1,26 +1,45 @@
-import { getAll, add, findById, update, remove } from './games.service.js';
-import { findById as getGenre, update as updateGenre } from '../genres/genres.service.js';
+import { getAll, create, getById, update, remove } from './games.service.js';
+import { addGameToGenreGameList, removeGameFromGenreGameList } from './util/manageGenreGameList.js';
 
-const addGameToGenre = async (genre, game) => {
-  let genreToUpdate = await getGenre(genre);
-  if (!genreToUpdate?.games) {
-    genreToUpdate = { ...genreToUpdate, games: [game] };
-  } else {
-    genreToUpdate.games.push(game);
-  }
+// import {
+//   getByGenreId as getGenreGameList,
+//   create as createGenreGameList,
+//   updateByGenreId as updateGenreGameList,
+//   removeByGenreId as removeGenreGameList,
+// } from '../genreGameLists/genreGameLists.service.js';
 
-  const genreBody = { games: genreToUpdate.games };
-  await updateGenre(genre, genreBody);
-};
+// const addGameToGenreGameList = async (genre, game) => {
+//   const genreGameListToUpdate = await getGenreGameList(genre);
+//
+//   if (!genreGameListToUpdate) {
+//     const genreGameListBody = { genre: genre, games: [game] };
+//
+//     await createGenreGameList(genreGameListBody);
+//   } else {
+//     if (genreGameListToUpdate.games) {
+//       genreGameListToUpdate.games.push(game);
+//     }
+//
+//     const genreGameListBody = { games: genreGameListToUpdate.games };
+//     await updateGenreGameList(genre, genreGameListBody);
+//   }
+// };
+//
+// const removeGameFromGenreGameList = async (genre, game) => {
+//   const genreGameListToUpdate = await getGenre(genre);
+//
+//   const deletedGameindex = genreGameListToUpdate.games.indexOf(game);
+//   genreGameListToUpdate.games.splice(deletedGameindex, 1);
+//
+//   if (genreGameListToUpdate.games.length === 0) {
+//     removeGenreGameList(genre);
+//   } else {
+//     const genreBody = { games: genreGameListToUpdate.games };
+//     await updateGenre(genre, genreBody);
+//   }
+// };
 
-const removeGameFromGenre = async (genre, game) => {
-  const genreToUpdate = await getGenre(genre);
-  const deletedGameindex = genreToUpdate.games.indexOf(game);
-  genreToUpdate.games.splice(deletedGameindex, 1);
-
-  const genreBody = { games: genreToUpdate.games };
-  await updateGenre(genre, genreBody);
-};
+// 📌
 
 export const getAllGames = async (req, res) => {
   try {
@@ -36,13 +55,13 @@ export const getAllGames = async (req, res) => {
   }
 };
 
-export const addGame = async (req, res) => {
+export const createGame = async (req, res) => {
   try {
     const body = req.body;
-    const game = await add(body);
+    const game = await create(body);
 
     game.genres.forEach((genre) => {
-      addGameToGenre(genre._id, game._id);
+      addGameToGenreGameList(genre, game._id);
     });
 
     res.send(game);
@@ -51,11 +70,11 @@ export const addGame = async (req, res) => {
   }
 };
 
-export const findGameById = async (req, res) => {
+export const getGameById = async (req, res) => {
   try {
     const idParam = req.params.id;
 
-    const game = await findById(idParam);
+    const game = await getById(idParam);
 
     if (!game) {
       return res.status(404).send({ message: 'not found' });
@@ -72,7 +91,7 @@ export const updateGame = async (req, res) => {
     const idParam = req.params.id;
     const body = req.body;
 
-    const gameById = await findById(idParam);
+    const gameById = await getById(idParam);
 
     if (!gameById) {
       return res.status(404).send({ message: 'not found' });
@@ -85,11 +104,11 @@ export const updateGame = async (req, res) => {
       const genresDeleted = gameById.genres.filter((genre) => !body.genres.includes(genre));
 
       genresAdded.forEach((genre) => {
-        addGameToGenre(genre, game._id);
+        addGameToGenreGameList(genre, idParam);
       });
 
       genresDeleted.forEach((genre) => {
-        removeGameFromGenre(genre, game._id);
+        removeGameFromGenreGameList(genre._id, idParam);
       });
     }
 
@@ -103,7 +122,7 @@ export const deleteGame = async (req, res) => {
   try {
     const idParam = req.params.id;
 
-    const gameById = await findById(idParam);
+    const gameById = await getById(idParam);
 
     if (!gameById) {
       return res.status(404).send({ message: 'not found' });
@@ -112,7 +131,7 @@ export const deleteGame = async (req, res) => {
     await remove(idParam);
 
     gameById.genres.forEach((genre) => {
-      removeGameFromGenre(genre, idParam);
+      removeGameFromGenreGameList(genre._id, idParam);
     });
 
     res.send({ message: 'deleted' });

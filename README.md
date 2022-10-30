@@ -10,7 +10,7 @@
 
 ---
 
-- ### redo MODELS to: Game, Genre, GamesByGenre:
+- ### redo MODELS: Game, Genre, GamesByGenre: ✔
 
 ```
 Game : {
@@ -27,4 +27,9 @@ GamesByGenre: {
     genre:
     games: Game[]
 }
+
 ```
+
+---
+
+---
