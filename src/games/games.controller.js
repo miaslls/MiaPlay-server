@@ -59,9 +59,6 @@ export const updateGame = async (req, res) => {
 
     const game = await update(idParam, body);
 
-    // 💡 EXTRACT THIS!?
-    // FIXME: maybe ok? maybe FUCKING REDO ME?
-
     const gameByIdGenreStrings = [];
 
     gameById.genres.forEach((genre) => {
@@ -87,6 +84,7 @@ export const updateGame = async (req, res) => {
   }
 };
 
+// FIXME: TEST ME BITCH!
 export const deleteGame = async (req, res) => {
   try {
     const idParam = req.params.id;
@@ -99,9 +97,33 @@ export const deleteGame = async (req, res) => {
 
     await remove(idParam);
 
-    gameById.genres.forEach((genre) => {
-      removeGameFromGenreGameList(genre._id, idParam);
-    });
+    //     const gameByIdGenreStrings = [];
+    //
+    //     gameById.genres.forEach((genre) => {
+    //       gameByIdGenreStrings.push(genre._id.toString());
+    //     });
+    //
+    //     console.log(gameByIdGenreStrings); // 🐞
+    //
+    //     gameByIdGenreStrings.forEach((genre) => {
+    //       removeGameFromGenreGameList(genre, idParam);
+    //     });
+
+    // gameById.genres.forEach((genre) => {
+    //   removeGameFromGenreGameList(genre._id, idParam);
+    // });
+
+    // gameById.genres.forEach(async (genre) => {
+    //   // console.log('gameById genre', genre); // 🐞
+    //   // console.log('gameById genreId toString', genre._id.toString()); // 🐞
+    //   await removeGameFromGenreGameList(genre._id.toString(), idParam);
+    // });
+
+    //     for (let i = 0; i < gameById.genres.length; i++) {
+    //       console.log('pass', i); // 🐞
+    //
+    //       removeGameFromGenreGameList(gameById.genres[i]._id.toString(), idParam);
+    //     }
 
     res.send({ message: 'deleted' });
   } catch (err) {
