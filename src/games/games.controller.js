@@ -99,9 +99,21 @@ export const updateGame = async (req, res) => {
 
     const game = await update(idParam, body);
 
+    // FIXME:
     if (gameById.genres !== body.genres) {
       const genresAdded = body.genres.filter((genre) => !gameById.genres.includes(genre));
-      const genresDeleted = gameById.genres.filter((genre) => !body.genres.includes(genre));
+      const genresDeleted = gameById.genres.filter(
+        (genre) => !body.genres.includes(genre._id.toString()),
+      );
+
+      // 🐞🐞
+      gameById.genres.forEach((genre) => {
+        if (!body.genres.includes(genre._id.toString())) {
+          console.log("body shouldn't contain", genre, genre._id);
+        }
+      });
+
+      console.log('added', genresAdded, 'deleted', genresDeleted); // 🐞
 
       genresAdded.forEach((genre) => {
         addGameToGenreGameList(genre, idParam);
