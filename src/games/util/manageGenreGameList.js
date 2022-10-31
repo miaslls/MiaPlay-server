@@ -22,15 +22,8 @@ const addGameToGenreGameList = async (genre, game) => {
   }
 };
 
-// FIXME: FUCK! is it fixed?
-
 const removeGameFromGenreGameList = async (genre, game) => {
-  // console.log('genre', genre); // 🐞
-  // console.log('game', game); // 🐞
-
   const genreGameListToUpdate = await getGenreGameList(genre);
-
-  // console.log(genreGameListToUpdate); // 🐞
 
   const genreGamesStringIds = [];
 
@@ -38,15 +31,8 @@ const removeGameFromGenreGameList = async (genre, game) => {
     genreGamesStringIds.push(game._id.toString());
   });
 
-  // console.log(genreGamesStringIds); // 🐞
-
   const deletedGameindex = genreGamesStringIds.indexOf(game);
-
-  // console.log(deletedGameindex, game); // 🐞
-
   genreGamesStringIds.splice(deletedGameindex, 1);
-
-  // console.log(genreGamesStringIds); // 🐞
 
   if (genreGamesStringIds.length > 0) {
     const genreBody = { games: genreGamesStringIds };
