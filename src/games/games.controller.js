@@ -95,6 +95,16 @@ export const deleteGame = async (req, res) => {
 
     await remove(idParam);
 
+    const gameByIdGenreStrings = [];
+
+    gameById.genres.forEach((genre) => {
+      gameByIdGenreStrings.push(genre._id.toString());
+    });
+
+    gameByIdGenreStrings.forEach((genre) => {
+      removeGameFromGenreGameList(genre, idParam);
+    });
+
     res.send({ message: 'deleted' });
   } catch (err) {
     res.status(500).send({ message: err.message });
