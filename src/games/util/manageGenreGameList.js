@@ -13,7 +13,7 @@ const addGameToGenreGameList = async (genre, game) => {
 
     await createGenreGameList(genreGameListBody);
   } else {
-    if (genreGameListToUpdate.games) {
+    if (!genreGameListToUpdate.games.includes(game)) {
       genreGameListToUpdate.games.push(game);
     }
 
@@ -32,7 +32,6 @@ const removeGameFromGenreGameList = async (genre, game) => {
     await removeGenreGameList(genre);
   } else {
     const genreBody = { games: genreGameListToUpdate.games };
-
     await updateGenreGameList(genre, genreBody);
   }
 };
