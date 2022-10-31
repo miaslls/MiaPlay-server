@@ -22,6 +22,8 @@ const addGameToGenreGameList = async (genre, game) => {
   }
 };
 
+// FIXME: maybe rewrite along with update game?
+
 const removeGameFromGenreGameList = async (genre, game) => {
   const genreGameListToUpdate = await getGenreGameList(genre);
 
@@ -31,11 +33,7 @@ const removeGameFromGenreGameList = async (genre, game) => {
     genreGamesStringIds.push(game._id.toString());
   });
 
-  // console.log(genreGamesStringIds); // 🐞
-
   const deletedGameindex = genreGamesStringIds.indexOf(game);
-
-  // console.log(deletedGameindex); // 🐞
 
   genreGamesStringIds.splice(deletedGameindex, 1);
 
