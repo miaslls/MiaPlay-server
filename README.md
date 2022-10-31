@@ -1,4 +1,4 @@
-# MiaPlay-API
+# **MiaPlay-API**
 
 ## 🔗 [miaplay-api-01.onrender.com](http://miaplay-api-01.onrender.com)
 
@@ -6,29 +6,47 @@
 
 ---
 
-## TODO:
+## **ROUTES:**
+
+### **genres**
+
+/genres
+
+- GET - /
+- POST - /
+- GET - /:id
+- PATCH - /:id
+- DELETE - /:id
 
 ---
 
-- ### redo MODELS: Game, Genre, GamesByGenre: ✔
+### **games**
 
-```
-Game : {
-    ...
-    genres: Genre[]
-}
+/games
 
-Genre: {
-    _id:
-    name:
-}
+- GET - /
+- POST - /
+- GET - /:id
+- PATCH - /:id
+- DELETE - /:id
 
-GamesByGenre: {
-    genre:
-    games: Game[]
-}
+---
 
-```
+### **genreGameLists**
+
+/genre-game-lists
+
+- GET - /
+
+---
+
+---
+
+## **TODO:**
+
+🔳 refactor updateGame/manageGenreGameList
+
+✅ redo MODELS: Game, Genre, GamesByGenre
 
 ---
 
