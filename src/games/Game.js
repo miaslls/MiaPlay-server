@@ -10,6 +10,7 @@ const GameSchema = new mongoose.Schema(
     trailer_youTubeUrl: { type: String, required: true },
     gameplay_youTubeUrl: { type: String, required: true },
     genres: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Genre' }],
+    favorite: { type: Boolean, default: false },
   },
   { versionKey: false },
 );
