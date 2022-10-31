@@ -75,9 +75,9 @@ export const deleteGenre = async (req, res) => {
       return res.status(404).send({ message: 'not found' });
     }
 
-    const genreGameList = getGenreGameList(idParam);
+    const genreGameList = await getGenreGameList(idParam);
 
-    if (genreGameList.length > 0) {
+    if (genreGameList) {
       return res.status(405).send({ message: 'cannot delete' });
     }
 
