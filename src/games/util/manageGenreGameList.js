@@ -25,14 +25,25 @@ const addGameToGenreGameList = async (genre, game) => {
 const removeGameFromGenreGameList = async (genre, game) => {
   const genreGameListToUpdate = await getGenreGameList(genre);
 
-  const deletedGameindex = genreGameListToUpdate.games.indexOf(game);
-  genreGameListToUpdate.games.splice(deletedGameindex, 1);
+  const genreGamesStringIds = [];
 
-  if (genreGameListToUpdate.games.length === 0) {
-    await removeGenreGameList(genre);
-  } else {
-    const genreBody = { games: genreGameListToUpdate.games };
+  genreGameListToUpdate.games.forEach((game) => {
+    genreGamesStringIds.push(game._id.toString());
+  });
+
+  // console.log(genreGamesStringIds); // 🐞
+
+  const deletedGameindex = genreGamesStringIds.indexOf(game);
+
+  // console.log(deletedGameindex); // 🐞
+
+  genreGamesStringIds.splice(deletedGameindex, 1);
+
+  if (genreGamesStringIds.length > 0) {
+    const genreBody = { games: genreGamesStringIds };
     await updateGenreGameList(genre, genreBody);
+  } else {
+    await removeGenreGameList(genre);
   }
 };
 

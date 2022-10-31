@@ -99,28 +99,33 @@ export const updateGame = async (req, res) => {
 
     const game = await update(idParam, body);
 
-    // FIXME:
-    if (gameById.genres !== body.genres) {
-      const genresAdded = body.genres.filter((genre) => !gameById.genres.includes(genre));
-      const genresDeleted = gameById.genres.filter(
-        (genre) => !body.genres.includes(genre._id.toString()),
-      );
+    // FIXME: maybe ok?
 
-      // 🐞🐞
-      gameById.genres.forEach((genre) => {
-        if (!body.genres.includes(genre._id.toString())) {
-          console.log("body shouldn't contain", genre, genre._id);
-        }
-      });
+    const gameByIdGenreStrings = [];
 
-      console.log('added', genresAdded, 'deleted', genresDeleted); // 🐞
+    gameById.genres.forEach((genre) => {
+      gameByIdGenreStrings.push(genre._id.toString());
+    });
+
+    if (gameByIdGenreStrings !== body.genres) {
+      const genresAdded = body.genres.filter((genre) => !gameByIdGenreStrings.includes(genre));
+      const genresDeleted = gameByIdGenreStrings.filter((genre) => !body.genres.includes(genre));
+
+      //       // 🐞🐞
+      //       gameByIdGenreStrings.forEach((genre) => {
+      //         if (!body.genres.includes(genre)) {
+      //           console.log("body shouldn't contain", genre);
+      //         }
+      //       });
+      //
+      //       console.log('added', genresAdded, 'deleted', genresDeleted); // 🐞
 
       genresAdded.forEach((genre) => {
         addGameToGenreGameList(genre, idParam);
       });
 
       genresDeleted.forEach((genre) => {
-        removeGameFromGenreGameList(genre._id, idParam);
+        removeGameFromGenreGameList(genre, idParam);
       });
     }
 
