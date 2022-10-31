@@ -13,7 +13,7 @@ import { validGameId, validGameBody } from './games.middleware.js';
 router.get('/', getAllGames);
 router.post('/', validGameBody, createGame);
 router.get('/:id', validGameId, getGameById);
-router.put('/:id', validGameId, updateGame);
+router.patch('/:id', validGameId, updateGame);
 router.delete('/:id', validGameId, deleteGame);
 
 export default router;
