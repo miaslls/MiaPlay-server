@@ -1,9 +1,9 @@
 import {
   getAll,
-  create,
-  getByGenreId,
-  updateByGenreId,
-  removeByGenreId,
+  // create,
+  // getByGenreId,
+  // updateByGenreId,
+  // removeByGenreId,
 } from './genreGameLists.service.js';
 
 export const getAllGenreGameLists = async (req, res) => {
