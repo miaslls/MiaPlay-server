@@ -1,8 +1,5 @@
 import { getAll, add, findById, update, remove } from './genres.service.js';
-import {
-  getByGenreId as getGenreGameList,
-  // removeByGenreId as removeGenreGameList,
-} from '../genreGameLists/genreGameLists.service.js';
+import { getByGenreId as getGenreGameList } from '../genreGameLists/genreGameLists.service.js';
 
 export const getAllGenres = async (req, res) => {
   try {
@@ -82,7 +79,6 @@ export const deleteGenre = async (req, res) => {
     }
 
     await remove(idParam);
-    // await removeGenreGameList(idParam);
 
     res.send({ message: 'deleted' });
   } catch (err) {
