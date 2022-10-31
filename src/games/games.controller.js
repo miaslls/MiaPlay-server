@@ -1,46 +1,6 @@
 import { getAll, create, getById, update, remove } from './games.service.js';
 import { addGameToGenreGameList, removeGameFromGenreGameList } from './util/manageGenreGameList.js';
 
-// import {
-//   getByGenreId as getGenreGameList,
-//   create as createGenreGameList,
-//   updateByGenreId as updateGenreGameList,
-//   removeByGenreId as removeGenreGameList,
-// } from '../genreGameLists/genreGameLists.service.js';
-
-// const addGameToGenreGameList = async (genre, game) => {
-//   const genreGameListToUpdate = await getGenreGameList(genre);
-//
-//   if (!genreGameListToUpdate) {
-//     const genreGameListBody = { genre: genre, games: [game] };
-//
-//     await createGenreGameList(genreGameListBody);
-//   } else {
-//     if (genreGameListToUpdate.games) {
-//       genreGameListToUpdate.games.push(game);
-//     }
-//
-//     const genreGameListBody = { games: genreGameListToUpdate.games };
-//     await updateGenreGameList(genre, genreGameListBody);
-//   }
-// };
-//
-// const removeGameFromGenreGameList = async (genre, game) => {
-//   const genreGameListToUpdate = await getGenre(genre);
-//
-//   const deletedGameindex = genreGameListToUpdate.games.indexOf(game);
-//   genreGameListToUpdate.games.splice(deletedGameindex, 1);
-//
-//   if (genreGameListToUpdate.games.length === 0) {
-//     removeGenreGameList(genre);
-//   } else {
-//     const genreBody = { games: genreGameListToUpdate.games };
-//     await updateGenre(genre, genreBody);
-//   }
-// };
-
-// 📌
-
 export const getAllGames = async (req, res) => {
   try {
     const games = await getAll();
