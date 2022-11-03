@@ -42,11 +42,24 @@
 
 ---
 
+&ensp;
+
+&ensp;
+
+&ensp;
+
+---
+
+---
+
 ## **TODO:**
 
-🔳 refactor updateGame/manageGenreGameList
+- 🔳 return RESPONSE on remove requests
 
-✅ redo MODELS: Game, Genre, GamesByGenre
+---
+
+- ✅ refactor updateGame/manageGenreGameList
+- ✅ redo MODELS: Game, Genre, GamesByGenre
 
 ---
 

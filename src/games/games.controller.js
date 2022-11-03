@@ -59,23 +59,25 @@ export const updateGame = async (req, res) => {
 
     const game = await update(idParam, body);
 
-    const gameByIdGenreStrings = [];
+    if (body.genres) {
+      const gameByIdGenreStrings = [];
 
-    gameById.genres.forEach((genre) => {
-      gameByIdGenreStrings.push(genre._id.toString());
-    });
-
-    if (gameByIdGenreStrings !== body.genres) {
-      const genresAdded = body.genres.filter((genre) => !gameByIdGenreStrings.includes(genre));
-      const genresDeleted = gameByIdGenreStrings.filter((genre) => !body.genres.includes(genre));
-
-      genresAdded.forEach((genre) => {
-        addGameToGenreGameList(genre, idParam);
+      gameById.genres.forEach((genre) => {
+        gameByIdGenreStrings.push(genre._id.toString());
       });
 
-      genresDeleted.forEach((genre) => {
-        removeGameFromGenreGameList(genre, idParam);
-      });
+      if (gameByIdGenreStrings !== body.genres) {
+        const genresAdded = body.genres.filter((genre) => !gameByIdGenreStrings.includes(genre));
+        const genresDeleted = gameByIdGenreStrings.filter((genre) => !body.genres.includes(genre));
+
+        genresAdded.forEach((genre) => {
+          addGameToGenreGameList(genre, idParam);
+        });
+
+        genresDeleted.forEach((genre) => {
+          removeGameFromGenreGameList(genre, idParam);
+        });
+      }
     }
 
     res.send(game);

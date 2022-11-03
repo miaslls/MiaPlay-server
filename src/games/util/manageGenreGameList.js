@@ -25,7 +25,7 @@ const addGameToGenreGameList = async (genre, game) => {
 const removeGameFromGenreGameList = async (genre, game) => {
   const genreGameListToUpdate = await getGenreGameList(genre);
 
-  // ❗❗❗
+  // 🚨
 
   if (genreGameListToUpdate.games.length > 0) {
     const genreGamesStringIds = [];
@@ -44,7 +44,7 @@ const removeGameFromGenreGameList = async (genre, game) => {
       await removeGenreGameList(genre);
     }
 
-    // ❗❗❗
+    // 🚨
   } else {
     await removeGenreGameList(genre);
   }
