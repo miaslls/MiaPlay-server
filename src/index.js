@@ -8,7 +8,7 @@ import genresRoute from './genres/genres.route.js';
 import genreGameListsRoute from './genreGameLists/genreGameLists.route.js';
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 
 databaseConnection();
 
