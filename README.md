@@ -1,6 +1,6 @@
 # **MiaPlay-API**
 
-## 🔗 [miaplay-api-01.onrender.com](http://miaplay-api-01.onrender.com)
+## 🔗 [miaplay-01-server.fly.dev](https://miaplay-01-server.fly.dev/)
 
 ---
 
@@ -38,29 +38,4 @@
 
 - GET - /
 
----
 
----
-
-&ensp;
-
-&ensp;
-
-&ensp;
-
----
-
----
-
-## **TODO:**
-
-- 🔳 return RESPONSE on remove requests
-
----
-
-- ✅ refactor updateGame/manageGenreGameList
-- ✅ redo MODELS: Game, Genre, GamesByGenre
-
----
-
----
