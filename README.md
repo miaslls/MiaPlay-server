@@ -1,4 +1,4 @@
-# **MiaPlay-API**
+# **MiaPlay - server**
 
 ## 🔗 [miaplay-01-server.fly.dev](https://miaplay-01-server.fly.dev/)
 
