@@ -8,14 +8,14 @@ datasource db {
 }
 
 model Genre {
-  id   String @id
+  id   String @id @default(uuid())
   name String @unique
 
   games Game[]
 }
 
 model Game {
-  id                  String  @id
+  id                  String  @id @default(uuid())
   title               String  @unique
   description         String
   year                Int
