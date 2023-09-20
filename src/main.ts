@@ -25,7 +25,7 @@ async function bootstrap() {
   SwaggerModule.setup('api-docs', app, swaggerDocument);
 
   app.enableCors({
-    origin: ['https://miaplay.vercel.app/', 'http://localhost:3000/'],
+    origin: '*',
   });
 
   app.enableShutdownHooks();
