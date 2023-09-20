@@ -26,13 +26,51 @@ export class GamesService {
   }
 
   async findOne(id: string) {
-    return await this.prisma.game.findUniqueOrThrow({ where: { id } });
+    return await this.prisma.game.findUniqueOrThrow({
+      where: { id },
+      include: { genres: true },
+    });
   }
 
-  // TODO:
-  // async update(id: string, updateGameDto: UpdateGameDto) {
-  //   return `This action updates a #${id} game`;
-  // }
+  async update(id: string, dto: UpdateGameDto) {
+    let data = {};
+
+    if ('genres' in dto) {
+      const gameInDb = await this.prisma.game.findUnique({
+        where: { id },
+        include: { genres: true },
+      });
+
+      const dbGenreIds = gameInDb.genres.map(({ id }) => id);
+
+      const genresToInclude = [];
+      const genresToExclude = [];
+
+      dto.genres.forEach((genreInDto) => {
+        if (!dbGenreIds.includes(genreInDto)) genresToInclude.push(genreInDto);
+      });
+
+      dbGenreIds.forEach((genreInDB) => {
+        if (!dto.genres.includes(genreInDB)) genresToExclude.push(genreInDB);
+      });
+
+      data = {
+        ...dto,
+        genres: {
+          connect: genresToInclude.map((id) => ({ id })),
+          disconnect: genresToExclude.map((id) => ({ id })),
+        },
+      };
+    } else {
+      data = { ...dto };
+    }
+
+    return this.prisma.game.update({
+      data,
+      where: { id },
+      include: { genres: true },
+    });
+  }
 
   async remove(id: string) {
     return await this.prisma.game.delete({ where: { id } });

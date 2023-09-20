@@ -27,12 +27,11 @@ export class GamesController {
     return this.gamesService.findOne(id);
   }
 
-  // TODO:
-  // @Patch(':id')
-  // @ApiOperation({ summary: 'update game by id' })
-  // update(@Param('id', ParseUUIDPipe) id: string, @Body() updateGameDto: UpdateGameDto) {
-  //   return this.gamesService.update(id, updateGameDto);
-  // }
+  @Patch(':id')
+  @ApiOperation({ summary: 'update game by id' })
+  update(@Param('id', ParseUUIDPipe) id: string, @Body() updateGameDto: UpdateGameDto) {
+    return this.gamesService.update(id, updateGameDto);
+  }
 
   @Delete(':id')
   @ApiOperation({ summary: 'delete game by id' })
