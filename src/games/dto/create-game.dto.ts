@@ -2,16 +2,15 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   ArrayMinSize,
   IsArray,
-  IsBoolean,
   IsNotEmpty,
   IsNumber,
   IsString,
-  IsUUID,
   IsUrl,
   Max,
   Min,
   MinLength,
 } from 'class-validator';
+import { UUID } from 'crypto';
 
 export class CreateGameDto {
   @ApiProperty({ description: 'game title' })
@@ -38,6 +37,10 @@ export class CreateGameDto {
   @Max(10)
   imdbScore: number;
 
+  @ApiProperty({ description: 'url of game cover image' })
+  @IsUrl()
+  cover_imgUrl: string;
+
   @ApiProperty({ description: 'url of trailer on YouTube' })
   @IsUrl()
   trailer_youTubeUrl: string;
@@ -46,12 +49,7 @@ export class CreateGameDto {
   @IsUrl()
   gameplay_youTubeUrl: string;
 
-  @ApiProperty({ description: 'is this a favorite', default: false })
-  @IsBoolean()
-  favorite: boolean;
-
   @IsArray()
   @ArrayMinSize(1)
-  @IsUUID(4, { each: true })
   genres: string[];
 }
