@@ -1,5 +1,5 @@
-This page is in <img src="assets/img/flag-en.png" width="14" alt="English"> English.
-Para visualizar essa página em <img src="assets/img/flag-pt-br.png" width="14" alt="Português"> Português, [clique aqui](./README-ptbr.md).
+Essa página está em <img src="assets/img/flag-pt-br.png" width="14" alt="Português"> Português.
+To view this page in <img src="assets/img/flag-en.png" width="14" alt="English"> English, [click here](./README.md).
 
 ---
 
@@ -12,11 +12,11 @@ Para visualizar essa página em <img src="assets/img/flag-pt-br.png" width="14" 
 ![Static Badge: Prisma](https://img.shields.io/badge/Prisma-5a5a5a?logo=prisma)
 ![Static Badge: PostgreSQL](https://img.shields.io/badge/PostgreSQL-5a5a5a?logo=postgresql)
 
-## 📄 Docs
+## 📄 Documentação
 
 - [miaplay-01-server.fly.dev/api-docs](https://miaplay-01-server.fly.dev/api-docs)
 
-## 🌐 API Reference
+## 🌐 Referência da API
 
 ### 🎭 Genres
 
@@ -98,7 +98,7 @@ DELETE /games/${id}
 GET /genre-game-lists
 ```
 
-## ⚙️ Install and Run
+## ⚙️ Instalação
 
 Clone the project
 
@@ -124,14 +124,14 @@ Run the project
 > npm run start
 ```
 
-## 👩‍💻 Authors
+## 👩‍💻 Autoria
 
 - [@miaslls](https://www.github.com/miaslls)
 
-## 📑 Related Projects
+## 📑 Projetos Relacionados
 
 - [MiaPlay](https://github.com/miaslls/MiaPlay#readme)
 
-## 🫶 Acknowledgements
+## 🫶 Recursos / Agradecimentos
 
 - [flaticon](https://flaticon.com)
