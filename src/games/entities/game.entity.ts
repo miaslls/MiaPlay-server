@@ -1,3 +1,5 @@
+import { Genre } from 'src/genres/entities/genre.entity';
+
 export class Game {
   id: string;
   title: string;
@@ -8,4 +10,6 @@ export class Game {
   trailer_youTubeUrl: string;
   gameplay_youTubeUrl: string;
   favorite: boolean;
+
+  genres: Genre[];
 }
