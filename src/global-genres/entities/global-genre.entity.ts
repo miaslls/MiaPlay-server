@@ -1,8 +1,11 @@
 import { Game } from 'src/games/entities/game.entity';
 
-export class Genre {
+export class GlobalGenre {
   id: string;
   name: string;
+
+  createdAt: Date;
+  updatedAt: Date;
 
   games: Game[];
 }

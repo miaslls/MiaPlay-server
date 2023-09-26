@@ -7,23 +7,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Genre {
+model GlobalGenre {
   id   String @id @default(uuid())
   name String @unique
 
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @map("updated_at")
+
   games Game[]
+
+  @@map("global_genre")
 }
 
 model Game {
-  id                  String  @id @default(uuid())
-  title               String  @unique
-  description         String
-  year                Int
-  imdbScore           Decimal @map("imdb_score")
-  cover_imgUrl        String  @map("cover_img_url")
-  trailer_youTubeUrl  String  @map("trailer_youtube_url")
-  gameplay_youTubeUrl String  @map("gameplay_youtube_url")
-  favorite            Boolean @default(false)
+  id       String @id @default(uuid())
+  title    String @unique
+  year     Int
+  platform String
+  imgUrl   String @map("img_url")
 
-  genres Genre[]
+  genre         String?
+  rating        Int?
+  review        String?
+  dateStarted   DateTime? @map("date_started")
+  dateCompleted DateTime? @map("date_completed")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @map("updated_at")
+
+  globalGenres GlobalGenre[]
 }

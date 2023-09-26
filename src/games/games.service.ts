@@ -10,8 +10,8 @@ export class GamesService {
   async create(dto: CreateGameDto) {
     const data = {
       ...dto,
-      genres: {
-        connect: dto.genres.map((id) => ({ id })),
+      globalGenres: {
+        connect: dto.globalGenres.map((id) => ({ id })),
       },
     };
 
@@ -20,7 +20,7 @@ export class GamesService {
 
   async findAll() {
     return await this.prisma.game.findMany({
-      include: { genres: true },
+      include: { globalGenres: true },
       orderBy: [{ year: 'desc' }, { title: 'asc' }],
     });
   }
@@ -28,30 +28,30 @@ export class GamesService {
   async findOne(id: string) {
     return await this.prisma.game.findUniqueOrThrow({
       where: { id },
-      include: { genres: true },
+      include: { globalGenres: true },
     });
   }
 
   async update(id: string, dto: UpdateGameDto) {
     let data = {};
 
-    if ('genres' in dto) {
+    if ('globalGenres' in dto) {
       const gameInDb = await this.prisma.game.findUnique({
         where: { id },
-        include: { genres: true },
+        include: { globalGenres: true },
       });
 
-      const dbGenreIds = gameInDb.genres.map(({ id }) => id);
+      const dbGenreIds = gameInDb.globalGenres.map(({ id }) => id);
 
       const genresToInclude = [];
       const genresToExclude = [];
 
-      dto.genres.forEach((genreInDto) => {
+      dto.globalGenres.forEach((genreInDto) => {
         if (!dbGenreIds.includes(genreInDto)) genresToInclude.push(genreInDto);
       });
 
       dbGenreIds.forEach((genreInDB) => {
-        if (!dto.genres.includes(genreInDB)) genresToExclude.push(genreInDB);
+        if (!dto.globalGenres.includes(genreInDB)) genresToExclude.push(genreInDB);
       });
 
       data = {
@@ -66,9 +66,12 @@ export class GamesService {
     }
 
     return this.prisma.game.update({
-      data,
+      data: {
+        ...data,
+        updatedAt: new Date(),
+      },
       where: { id },
-      include: { genres: true },
+      include: { globalGenres: true },
     });
   }
 

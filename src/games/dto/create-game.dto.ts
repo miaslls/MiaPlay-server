@@ -1,16 +1,19 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
   ArrayMinSize,
   IsArray,
-  IsNotEmpty,
+  IsDate,
   IsNumber,
+  IsOptional,
   IsString,
+  IsUUID,
   IsUrl,
   Max,
+  MaxDate,
   Min,
   MinLength,
 } from 'class-validator';
-import { UUID } from 'crypto';
 
 export class CreateGameDto {
   @ApiProperty({ description: 'game title' })
@@ -18,38 +21,56 @@ export class CreateGameDto {
   @MinLength(2)
   title: string;
 
-  @ApiProperty({ description: 'game description' })
-  @IsString()
-  @MinLength(5)
-  description: string;
-
   @ApiProperty({ description: 'game launch year' })
-  @IsNotEmpty()
   @IsNumber({ maxDecimalPlaces: 0 })
   @Min(1958)
   @Max(new Date().getFullYear())
   year: number;
 
-  @ApiProperty({ description: 'game score on IMDb' })
-  @IsNotEmpty()
-  @IsNumber({ maxDecimalPlaces: 1 })
+  @ApiProperty({ description: 'game platform' })
+  @IsString()
+  @MinLength(2)
+  platform: string;
+
+  @ApiProperty({ description: 'url of game image' })
+  @IsUrl()
+  imgUrl: string;
+
+  @ApiProperty({ description: 'game genre' })
+  @IsOptional()
+  @IsString()
+  @MinLength(2)
+  genre: string;
+
+  @ApiProperty({ description: 'perceived game rating' })
+  @IsOptional()
+  @IsNumber({ maxDecimalPlaces: 0 })
   @Min(0)
   @Max(10)
-  imdbScore: number;
+  rating: number;
 
-  @ApiProperty({ description: 'url of game cover image' })
-  @IsUrl()
-  cover_imgUrl: string;
+  @ApiProperty({ description: 'personal game observations' })
+  @IsOptional()
+  @IsString()
+  @MinLength(5)
+  review: string;
 
-  @ApiProperty({ description: 'url of trailer on YouTube' })
-  @IsUrl()
-  trailer_youTubeUrl: string;
+  @ApiProperty({ description: 'game start date' })
+  @IsOptional()
+  @Type(() => Date)
+  @IsDate()
+  @MaxDate(new Date())
+  dateStarted: Date;
 
-  @ApiProperty({ description: 'url of gameplay video on YouTube' })
-  @IsUrl()
-  gameplay_youTubeUrl: string;
+  @ApiProperty({ description: 'game completion date' })
+  @IsOptional()
+  @Type(() => Date)
+  @IsDate()
+  @MaxDate(new Date())
+  dateCompleted: Date;
 
   @IsArray()
   @ArrayMinSize(1)
-  genres: string[];
+  @IsUUID(4, { each: true }) // ⚠️
+  globalGenres: string[];
 }

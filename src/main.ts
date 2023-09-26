@@ -16,7 +16,7 @@ async function bootstrap() {
     .setDescription('')
     .setVersion('2.0.0')
     .addTag('status')
-    .addTag('genres')
+    .addTag('global-genres')
     .addTag('games')
     .build();
 
