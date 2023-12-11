@@ -6,7 +6,6 @@ To view this page in <img src="assets/img/flag-en.png" width="14" alt="English">
 # <img src="assets/img/server.png" width="20" alt="Server icon"> MiaPlay (server)
 
 ![Static Badge: Study](https://img.shields.io/badge/study-blue)
-![Static Badge: Version - 2.0.0](https://img.shields.io/badge/version-2.0.0-green)
 ![Static Badge: NestJS](https://img.shields.io/badge/NestJS-5a5a5a?logo=nestjs)
 ![Static Badge: TypeScript](https://img.shields.io/badge/TypeScript-5a5a5a?logo=typescript)
 ![Static Badge: Prisma](https://img.shields.io/badge/Prisma-5a5a5a?logo=prisma)
